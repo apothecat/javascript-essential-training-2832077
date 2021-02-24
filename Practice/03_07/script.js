@@ -8,3 +8,14 @@
  * - Do the same as above - find an element, make a change to it, call the function, make sure it works.
  * - Finally, create an arrow function, make it do something, and call it.
  */
+
+const cup = {
+  handle: true,
+  capacityMl: 250,
+  design: "mushrooms",
+  empty: false,
+  contents: {
+    type: "coffee",
+    hotOrCold: "hot",
+  },
+};
