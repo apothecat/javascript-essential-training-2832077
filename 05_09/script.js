@@ -48,9 +48,25 @@ const content = `
 
 const main = document.querySelector(".maincontent");
 
+const menuContent = `
+      <ul class ="menu-list">
+        <li class = "menu-item"><a class = "menu-link" href="#">Home</a></li>
+        <li class = "menu-item"><a class = "menu-link"href="#">News</a></li>
+        <li class = "menu-item"><a class = "menu-link"href="#">Shop</a></li>
+        <li class = "menu-item"><a class = "menu-link"href="#">Contact</a></li>
+        <li class = "menu-item"><a class = "menu-link"href="#">About</a></li>
+      </ul>
+`;
+
+const pageHeader = document.querySelector(".page-header");
+
 const newArticle = document.createElement("article");
 newArticle.classList.add("backpack");
 newArticle.setAttribute("id", "everyday");
 newArticle.innerHTML = content;
 
+const newNav = document.createElement("nav");
+newNav.innerHTML = menuContent;
+
 main.append(newArticle);
+main.insertBefore(newNav, pageHeader);
