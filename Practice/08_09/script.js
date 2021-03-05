@@ -24,6 +24,7 @@ const frogpack = {
   },
   lidOpen: false,
   image: "../../assets/images/frog.svg",
+  caption: "A fabulous froggy backpack!",
   toggleLid: function (lidStatus) {
     this.lidOpen = lidStatus;
   },
@@ -57,3 +58,26 @@ const content = `
       }</span></li>
     </ul>  
 `;
+
+// Helper image function
+
+const helperImageFunction = (object) => {
+  let newFigure = document.createElement("figure");
+  let newImg = document.createElement("img");
+  newImg.setAttribute("src", object.image);
+  newImg.setAttribute("alt", object.caption);
+  let newCaption = document.createElement("figcaption");
+  newCaption.innerText = object.caption;
+  newFigure.append(newImg, newCaption);
+  return newFigure;
+};
+
+// Main function
+const createArticle = (object) => {
+  let newArticle = document.createElement("article");
+  newArticle.innerHTML = content;
+  newArticle.prepend(helperImageFunction(object));
+  return newArticle;
+};
+
+document.querySelector("main").append(createArticle(frogpack));
