@@ -15,4 +15,4 @@ stuff.forEach((item) => {
   stuffList.append(listItem);
 });
 
-article.append(stuffList)
+article.append(stuffList);
