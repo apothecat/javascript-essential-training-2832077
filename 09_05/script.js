@@ -9,26 +9,27 @@ import backpackObjectArray from "./components/data.js";
  * Add event listener to the lid-toggle button.
  */
 const lidToggle = function () {
-   
   // Find the current backpack object in backpackObjectArray
-  let backpackObject = backpackObjectArray.find( ({ id }) => id === this.parentElement.id );
-  
+  let backpackObject = backpackObjectArray.find(
+    ({ id }) => id === this.parentElement.id
+  );
+
   // Toggle lidOpen status
-  backpackObject.lidOpen == true 
-    ? backpackObject.lidOpen = false 
-    : backpackObject.lidOpen = true;
+  backpackObject.lidOpen == true
+    ? (backpackObject.lidOpen = false)
+    : (backpackObject.lidOpen = true);
 
   // Toggle button text
-  this.innerText == "Open lid" 
-    ? this.innerText = "Close lid" 
-    : this.innerText = "Open lid";
+  this.innerText == "Open lid"
+    ? (this.innerText = "Close lid")
+    : (this.innerText = "Open lid");
 
   // Set visible property status text
   let status = this.parentElement.querySelector(".backpack__lid span");
   status.innerText == "closed"
     ? (status.innerText = "open")
     : (status.innerText = "closed");
-}
+};
 
 /**
  * - Loop through backpackObjectArray
@@ -69,13 +70,25 @@ const backpackList = backpackObjectArray.map((backpack) => {
     <button class="lid-toggle">Open lid</button>
   `;
 
-  const button = backpackArticle.querySelector(".lid-toggle")
-  const status = backpackArticle.querySelector(".backpack__lid span")
+  const button = backpackArticle.querySelector(".lid-toggle");
+  const status = backpackArticle.querySelector(".backpack__lid span");
 
-  button.addEventListener("click", (event) => {
-    console.log(event)
-    status.innerText === "open" ? status.innerText = "closed" : status.innerText = "open"
-  })
+  button.addEventListener(
+    "click",
+    lidToggle
+    // function (event) {
+    //   // const button = backpackArticle.querySelector(".lid-toggle");
+    //   // console.log(event);
+    //   // console.log(button.innerHTML);
+    //   //this.innerText = "Changed";
+    //   this.innerText === "Open Lid"
+    //     ? (this.innerText = "Close Lid")
+    //     : (this.innerText = "Open Lid");
+    //   status.innerText === "open"
+    //     ? (status.innerText = "closed")
+    //     : (status.innerText = "open");
+    // }
+  );
 
   return backpackArticle;
 });
