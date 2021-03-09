@@ -13,7 +13,9 @@ body {
   grid-template-columns: repeat(7, 6rem);
   gap: 1rem;
   list-style-type: none;
-  border-radius: 0.5rem;
+  /* border-radius: 5rem; */
+  /* border-style: solid;
+  border-color: yellow; */
 }
 
 .cell {
@@ -21,4 +23,17 @@ body {
   width: 6rem;
   height: 6rem;
   background-color: hsl(0, 0%, 90%);
+}
+
+.highlight {
+  border-style: solid;
+  border-color: yellow;
+}
+
+.active {
+  background-color: red;
+}
+
+.darkmode {
+  background-color: darkslategray;
 }
