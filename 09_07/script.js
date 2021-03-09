@@ -40,14 +40,45 @@ const lidToggle = function (event, button, newArg) {
     : (status.innerText = "closed");
 };
 
+// Challenge: Create an event listener.
+
+// Create a function to output the strap length form
+
+const newStrapLength = (straps) => {
+  // Iterate through each item with the .backpack__strap class.
+
+  straps.forEach((strap) => {
+    // Capture the value of the data-side attribute to indicate the strap side.
+
+    let dataSide = strap.getAttribute("data-side");
+
+    // Create a new form element
+    const strapLengthForm = document.createElement("form");
+    strapLengthForm.classList.add(`${dataSide}-strap-length-form`);
+
+    // Populate form with an input and a button
+    strapLengthForm.innerHTML = `
+    <input type="number" name="${dataSide}Length" placeholder="New ${dataSide} length">
+    <button>Update</button>
+    `;
+
+    // Add event listener to each of the strap length forms.
+    // Update strap length value with value submitted from form.
+    strapLengthForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let newStrapLengthValue = strapLengthForm.querySelector("input").value;
+      strap.querySelector("span").innerHTML = `${newStrapLengthValue} inches`;
+      strapLengthForm.querySelector("input").value = "";
+    });
+
+    strap.append(strapLengthForm);
+  });
+};
+
 const backpackList = backpackObjectArray.map((backpack) => {
   let backpackArticle = document.createElement("article");
   backpackArticle.classList.add("backpack");
   backpackArticle.setAttribute("id", backpack.id);
-
-  // Challenge: Create an event listener.
-  // Create a form element.
-  // Populate the form with an input and a submit button.
 
   backpackArticle.innerHTML = `
     <figure class="backpack__image">
@@ -68,18 +99,10 @@ const backpackList = backpackObjectArray.map((backpack) => {
       <li class="feature backpack__strap" data-side="left">Left strap length: <span>${
         backpack.strapLength.left
       } inches</span>
-        <form id="left-strap-length-form">
-            <input type="text" id="strap-length-input" value="New Left Strap Length">
-            <button type="submit" id="submit-button">Update</button>
-        </form>
       </li>
       <li class="feature backpack__strap" data-side="right">Right strap length: <span>${
         backpack.strapLength.right
       } inches</span>
-        <form id="right-strap-length-form">
-            <input type="text" id="strap-length-input" value="New Right Strap Length">
-            <button type="submit" id="submit-button">Update</button>
-        </form> 
       </li>
       <li class="feature backpack__lid">Lid status: <span>${
         backpack.lidOpen ? "open" : "closed"
@@ -88,40 +111,17 @@ const backpackList = backpackObjectArray.map((backpack) => {
     <button class="lid-toggle">Open lid</button>
   `;
 
+  // Find the two elements with the .backpack__strap class.
+
+  let straps = backpackArticle.querySelectorAll(".backpack__strap");
+  newStrapLength(straps);
+
   let button = backpackArticle.querySelector(".lid-toggle");
   let newArg = "The argument I want to pass to the callback function!";
 
   // Add event listener
   button.addEventListener("click", (event) => {
     lidToggle(event, button, newArg);
-  });
-
-  // Find the two elements with the .backpack__strap class.
-
-  let straps = backpackArticle.querySelectorAll(".backpack__strap");
-
-  // Iterate through each item with the .backpack__strap
-  // class.
-
-  straps.forEach((strap) => {
-    console.log(strap);
-    // Capture the value of the data-side attribute to
-    // indicate the strap side.
-
-    // const dataSide = strap.getAttribute("data-side");
-
-    // Create a function to output the strap length form???
-
-    // Add event listener to each of the strap length forms.
-    // Update strap length value with value submitted from form.
-
-    let strapLengthForm = strap.querySelector("form");
-
-    strapLengthForm.addEventListener("submit", (e) => {
-      let newStrapLengthValue = strapLengthForm.querySelector("input").value;
-      strap.querySelector("span").innerText = newStrapLengthValue + " inches";
-      e.preventDefault();
-    });
   });
 
   return backpackArticle;
